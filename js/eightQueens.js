@@ -1,13 +1,16 @@
 const N = 8;
 let board = new Array(N);
 
-for (let i = 0; i < board.length; i++) {
+function createBoard(board) {
 
-    board[i] = new Array(N);
+    for (let i = 0; i < board.length; i++) {
 
-    for (let j = 0; j < board[i].length; j++) {
-
-        board[i][j] = 0;
+        board[i] = new Array(N);
+    
+        for (let j = 0; j < board[i].length; j++) {
+    
+            board[i][j] = 0;
+        }
     }
 }
 
@@ -74,20 +77,25 @@ function solveChallange(board, col = 0) {
     return false;
 }
 
-solveChallange(board);
+function outputSolution(board) {
 
-generateBlocks(N, N);
+    const tags = document.querySelectorAll("div");
 
-const tags = document.querySelectorAll("div");
-for (let i = 0; i < N; i++) {
-
-    for (let j = 0; j < N; j++) {
-
-        if (board[i][j] == 1) {
-
-            let index = N * i + j;
-
-            tags[index].innerText = 1;
+    for (let i = 0; i < N; i++) {
+    
+        for (let j = 0; j < N; j++) {
+    
+            if (board[i][j] == 1) {
+    
+                let index = N * i + j;
+    
+                tags[index].innerText = 1;
+            }
         }
     }
 }
+
+createBoard(board);
+solveChallange(board);
+generateBlocks(N, N);
+outputSolution(board);
