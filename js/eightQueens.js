@@ -1,7 +1,6 @@
-const N = 8;
-let board = new Array(N);
+let board;
 
-function createBoard(board) {
+function createBoard(board, N) {
 
     for (let i = 0; i < board.length; i++) {
 
@@ -27,16 +26,16 @@ function generateBlocks(rows, cols) {
             ele.style.border = "solid 2px red";
             ele.style.width = "160px";
             ele.style.height = "50px";
-            ele.style.textAlign = "center";
             ele.style.marginLeft = j * 160 + "px";
             ele.style.marginTop = i * 50 + "px";
-
+            ele.className = "text-center";
+        
             body.appendChild(ele);
         }
     }
 }
 
-function isAttackedSpace(board, row, col) {
+function isAttackedSpace(board, row, col, N) {
 
     for (let i = 0; i < col; i++) 
     if (board[row][i] == 1) 
@@ -53,7 +52,7 @@ function isAttackedSpace(board, row, col) {
     return false; 
 }
 
-function solveChallange(board, col = 0) {
+function solveChallange(board, N, col = 0) {
 
     if (col >= N) {
 
@@ -62,11 +61,11 @@ function solveChallange(board, col = 0) {
 
     for (let i = 0; i < N; i++) {
 
-            if (!isAttackedSpace(board, i, col)) {
+            if (!isAttackedSpace(board, i, col, N)) {
                 board[i][col] = 1;
             
 
-            if (solveChallange(board, col + 1)) {
+            if (solveChallange(board, N, col + 1)) {
                 return true;
             }
 
@@ -77,7 +76,7 @@ function solveChallange(board, col = 0) {
     return false;
 }
 
-function outputSolution(board) {
+function outputSolution(board, N) {
 
     const tags = document.querySelectorAll("div");
 
@@ -89,13 +88,44 @@ function outputSolution(board) {
     
                 let index = N * i + j;
     
-                tags[index].innerText = 1;
+                tags[index].innerText = "Q";
             }
         }
     }
 }
 
-createBoard(board);
-solveChallange(board);
-generateBlocks(N, N);
-outputSolution(board);
+function removeField() {
+
+    const fields = document.querySelectorAll("div");
+    const text = document.querySelector("text");
+    const body = document.querySelector("body");
+
+    if (fields !== null)
+        fields.forEach(element => {
+            body.removeChild(element);
+        });
+
+    if (text !== null)
+        body.removeChild(text);
+}
+
+function buttonPressed() {
+
+    const N = parseInt(document.querySelector("input").value);
+    board = new Array(N);
+   
+    removeField();
+    createBoard(board, N);
+
+    if (!solveChallange(board, N)) {
+
+        let ele = document.createElement("text");
+    
+        ele.innerText = "Solution doesn't exist!";
+
+        document.querySelector("body").appendChild(ele);
+    }
+
+    generateBlocks(N, N);
+    outputSolution(board, N);
+}
