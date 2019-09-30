@@ -23,13 +23,13 @@ function generateBlocks(rows, cols) {
             
             let ele = document.createElement("div");
 
-            ele.style.border = "solid 2px red";
+            ele.style.border = "solid 2px #cc3333";
             ele.style.width = "160px";
             ele.style.height = "50px";
             ele.style.marginLeft = j * 160 + "px";
             ele.style.marginTop = i * 50 + "px";
             ele.className = "text-center";
-        
+            
             body.appendChild(ele);
         }
     }

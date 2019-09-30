@@ -2,3 +2,10 @@ div {
 
     position: absolute;
 }
+
+main {
+
+    margin: auto;
+    width: 250px;
+    text-align: center;
+}
