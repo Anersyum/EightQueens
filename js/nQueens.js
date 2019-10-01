@@ -128,16 +128,21 @@ function buttonPressed() {
 
             document.querySelector("body").appendChild(ele);
         }
+        else {
 
-        generateBlocks(N, N);
+            generateBlocks(N, N);
+        }
+
         outputSolution(board, N);
     }
     else {
 
+        removeField();
+
         let ele = document.createElement("text");
         
-            ele.innerText = "You must enter a number!";
+        ele.innerText = "You must enter a number!";
 
-            document.querySelector("body").appendChild(ele);
+        document.querySelector("body").appendChild(ele);
     }
 }
