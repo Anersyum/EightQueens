@@ -112,20 +112,32 @@ function removeField() {
 function buttonPressed() {
 
     const N = parseInt(document.querySelector("input").value);
-    board = new Array(N);
-   
-    removeField();
-    createBoard(board, N);
 
-    if (!solveChallange(board, N)) {
+    if (!isNaN(N)) {
+
+        board = new Array(N);
+    
+        removeField();
+        createBoard(board, N);
+
+        if (!solveChallange(board, N)) {
+
+            let ele = document.createElement("text");
+        
+            ele.innerText = "Solution doesn't exist!";
+
+            document.querySelector("body").appendChild(ele);
+        }
+
+        generateBlocks(N, N);
+        outputSolution(board, N);
+    }
+    else {
 
         let ele = document.createElement("text");
-    
-        ele.innerText = "Solution doesn't exist!";
+        
+            ele.innerText = "You must enter a number!";
 
-        document.querySelector("body").appendChild(ele);
+            document.querySelector("body").appendChild(ele);
     }
-
-    generateBlocks(N, N);
-    outputSolution(board, N);
 }
