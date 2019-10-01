@@ -1,3 +1,3 @@
-# EightQueens
+# NQueens
 
-Eight queens problem solution using recursive backtracking
+N queens problem solution using recursive backtracking
